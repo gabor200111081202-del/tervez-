@@ -29,14 +29,24 @@ workflows:
           pod install
           cd ..
 
-      - name: Build iOS (no signing)
+      - name: Build iOS (no signing + manual IPA)
         script: |
-          flutter build ipa --release --no-codesign
+          flutter build ios --release --no-codesign
 
-          echo "=== SEARCHING IPA ==="
-          find . -name "*.ipa" || true
+          cd build/ios/iphoneos
+
+          mkdir Payload
+          cp -r Runner.app Payload/
+
+          zip -r Runner.ipa Payload
+
+          mv Runner.ipa ../../Runner.ipa
+
+          echo "=== IPA CREATED ==="
+          ls ../../
 
     artifacts:
+      - build/ios/Runner.ipa
       - "**/*.ipa"
 
   android-workflow:
