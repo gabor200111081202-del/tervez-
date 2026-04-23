@@ -33,13 +33,7 @@ workflows:
         script: |
           flutter build ipa --no-codesign
 
-       artifacts:
+    artifacts:
       - build/ios/ipa/*.ipa
       - build/ios/archive/*.xcarchive
       - /Users/builder/clone/build/ios/ipa/*.ipa
-
-
-
-
-
-
