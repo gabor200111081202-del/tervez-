@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "689486150472",
+    "project_id": "gaborapp-732b7",
+    "storage_bucket": "gaborapp-732b7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:689486150472:android:2591d7ab15878429c4117d",
+        "android_client_info": {
+          "package_name": "com.example.esemeny_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxRqDwGFEDBbh9z7I2BD_AEa3BTsM8FpE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
