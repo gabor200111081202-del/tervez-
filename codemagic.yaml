@@ -1,4 +1,44 @@
 workflows:
+  ios-workflow:
+    name: iOS Build
+    environment:
+      flutter: stable
+      xcode: latest
+
+    scripts:
+      - name: Install dependencies
+        script: |
+          flutter pub get
+
+      - name: Generate iOS project
+        script: |
+          flutter create .
+
+      - name: Force iOS 15 target everywhere
+        script: |
+          find ios -name "*.pbxproj" -exec sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = [0-9.]*/IPHONEOS_DEPLOYMENT_TARGET = 15.0/g' {} \;
+
+      - name: Fix Podfile platform
+        script: |
+          sed -i '' 's/platform :ios, .*/platform :ios, '\''15.0'\''/' ios/Podfile || echo "platform :ios, '15.0'" >> ios/Podfile
+
+      - name: Clean pods
+        script: |
+          cd ios
+          rm -rf Pods Podfile.lock
+          pod install
+          cd ..
+
+      - name: Build iOS (no signing)
+        script: |
+          flutter build ipa --release --no-codesign
+
+          echo "=== SEARCHING IPA ==="
+          find . -name "*.ipa" || true
+
+    artifacts:
+      - "**/*.ipa"
+
   android-workflow:
     name: Android Build
     environment:
